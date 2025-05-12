@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_stripe__payments
+    description: One row per payment transaction
+    columns:
+      - name: amount
+        description: "{{ doc('stripe_amount') }}"

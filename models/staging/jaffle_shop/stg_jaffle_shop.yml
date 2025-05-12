@@ -2,18 +2,18 @@ version: 2
 
 models:
   - name: stg_jaffle_shop__customers
-    description: one unique customer per row
+    description: One unique customer per row
     columns:
       - name: customer_id
-        description: primary key
+        description: Primary key
         tests:
           - unique
           - not_null
   - name: stg_jaffle_shop__orders
-    description: one order per row
+    description: One order per row
     columns:
       - name: order_id
-        description: primary key
+        description: Primary key
         tests:
           - unique
           - not_null
@@ -23,6 +23,7 @@ models:
           - accepted_values:
               values: ['shipped', 'completed', 'return_pending', 'returned', 'placed']
       - name: customer_id
+        description: Foreign key from orders to customers
         tests:
           - relationships:
               field: customer_id
