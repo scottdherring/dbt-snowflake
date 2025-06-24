@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key = 'order_id',
+        incremental_strategy = 'merge',
+        on_schema_change='fail'
+    )
+}}
+
 with orders as  (
 
     select * 
@@ -31,7 +40,10 @@ final as (
         coalesce (order_payments.amount, 0) as amount
     from orders
     left join order_payments using (order_id)
-
 )
 
-select * from final
+select * 
+from final
+{% if is_incremental() %}
+where valid_order_date > (select max(valid_order_date) from {{ this }}) 
+{% endif %}
