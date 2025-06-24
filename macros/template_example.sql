@@ -7,6 +7,6 @@
         {{ log('SQL results ' ~ results, info=True) }}
         select 
             {{ results }} as is_real
-        from a_real_table
+        from dual
     {% endif %}
 {% endmacro %}

@@ -37,10 +37,17 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   jaffle_shop:
+    +required_tests: {"unique.*|not_null":2}
     # Applies to all files under models/marts/
     marts:
+      +required_tests: {"relationship.*":1}
       +materialized: table
     staging:
       +materialized: view
   snowflake_spend:
     +enabled: true
+
+tests:
+  jaffle_shop:
+    +severity: warn
+    +store_failures: true

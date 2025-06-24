@@ -4,6 +4,7 @@
         {%- if not loop.first -%}
             union all
         {%- endif %}
-        select * from {{ table.database }}.{{ table.schema }}.{{ table.name }}
+        select '{{ table.database }}.{{ table.schema }}.{{ table.name }}' as table_name
+        from dual
     {% endfor -%}
 {%- endmacro -%}

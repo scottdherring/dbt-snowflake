@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_orders
+    columns:
+      - name: amount
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 5
+              row_condition: "order_id is not null"
+              strictly: true
